@@ -18,10 +18,6 @@ type EventLobby struct {
 	UpdatedAt   uint64          `json:"updatedAt,omitempty"`
 }
 
-type DiscordServer struct {
-	ID string `json:"id"`
-}
-
 // AccessRule is an enumeration that defines the access required to join a lobby
 type AccessRule int
 
