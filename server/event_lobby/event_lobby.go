@@ -12,7 +12,7 @@ type EventLobby struct {
 	Platform    PlatformDetails `json:"platform"`
 	StartAt     uint64          `json:"startAt"`
 	EndAt       uint64          `json:"endAt"`
-	Mode        AccessRule      `json:"mode"`
+	AccessRule  AccessRule      `json:"accessRule"`
 	Limit       uint8           `json:"limit,omitempty"`
 	CreatedAt   uint64          `json:"createdAt"`
 	UpdatedAt   uint64          `json:"updatedAt,omitempty"`
