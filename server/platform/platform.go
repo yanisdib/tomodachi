@@ -1,6 +1,6 @@
 package platform
 
-// PlatformDetails defines the details of the hosting plaform
+// Platform defines the details of a hosting plaform
 type Platform struct {
 	Name       SupportedPlatform `json:"name"`
 	Server     string            `json:"server,omitempty"`
@@ -10,7 +10,7 @@ type Platform struct {
 	AccessLink string            `json:"accessLink,omitempty"`
 }
 
-// HostingPlatform defines the platform used to host an event
+// SupportedPlatform defines the platform used to host an event
 type SupportedPlatform int
 
 const (
