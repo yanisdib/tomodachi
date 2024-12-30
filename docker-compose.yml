@@ -1,0 +1,28 @@
+services:
+
+  postgres:
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USER_FILE=/run/secrets/db_user
+      - POSTGRESQL_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRESQL_DB_FILE=/run/secrets/db_name
+    secrets:
+      - db_user
+      - db_password
+      - db_name
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/database/create.sql:/docker-entrypoint-initdb.d/create.sql
+    ports:
+      - "5000:5432"
+
+secrets:
+  db_user:
+    file: db_user.txt
+  db_password:
+    file: db_password.txt
+  db_name:
+    file: db_name.txt
+
+volumes:
+  postgres_data:

@@ -2,12 +2,13 @@ package platform
 
 // Platform defines the details of a hosting plaform
 type Platform struct {
-	Name       SupportedPlatform `json:"name"`
-	Server     string            `json:"server,omitempty"`
-	NitroLevel uint8             `json:"nitroLevel,omitempty"`
-	Resolution string            `json:"resolution,omitempty"`
-	Network    uint8             `json:"network,omitempty"`
-	AccessLink string            `json:"accessLink,omitempty"`
+	Id              int               `json:"id"`
+	Name            SupportedPlatform `json:"name"`
+	Server          string            `json:"server,omitempty"`
+	NitroLevel      uint8             `json:"nitroLevel,omitempty"`
+	VideoResolution string            `json:"videoResolution,omitempty"`
+	NetworkQuality  uint8             `json:"networkQuality,omitempty"`
+	AccessLink      string            `json:"accessLink,omitempty"`
 }
 
 // SupportedPlatform defines the platform used to host an event
