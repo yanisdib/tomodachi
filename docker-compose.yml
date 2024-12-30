@@ -1,15 +1,29 @@
 services:
 
+  api:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRESQL_USER_FILE=/run/secrets/db_user
+      - POSTGRESQL_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRESQL_DB_FILE=/run/secrets/db_name
+      - POSTGRESQL_HOST_FILE=/run/secrets/db_host
+    networks:
+      - local_network
+
   postgres:
     image: bitnami/postgresql:latest
     environment:
       - POSTGRESQL_USER_FILE=/run/secrets/db_user
       - POSTGRESQL_PASSWORD_FILE=/run/secrets/db_password
       - POSTGRESQL_DB_FILE=/run/secrets/db_name
+      - POSTGRESQL_HOST_FILE=/run/secrets/db_host
     secrets:
       - db_user
       - db_password
       - db_name
+      - db_host
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./server/database/create.sql:/docker-entrypoint-initdb.d/create.sql
@@ -23,6 +37,13 @@ secrets:
     file: db_password.txt
   db_name:
     file: db_name.txt
+  db_host:
+    file: db_host.txt
 
 volumes:
   postgres_data:
+
+
+networks:
+  local_network:
+    driver: bridge
