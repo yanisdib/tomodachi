@@ -9,8 +9,15 @@ services:
       - POSTGRESQL_PASSWORD_FILE=/run/secrets/db_password
       - POSTGRESQL_DB_FILE=/run/secrets/db_name
       - POSTGRESQL_HOST_FILE=/run/secrets/db_host
+      - POSTGRESQL_PORT=5432
+    secrets:
+      - db_user
+      - db_password
+      - db_name
+      - db_host
     networks:
       - local_network
+    restart: always
 
   postgres:
     image: bitnami/postgresql:latest
@@ -29,6 +36,9 @@ services:
       - ./server/database/create.sql:/docker-entrypoint-initdb.d/create.sql
     ports:
       - "5000:5432"
+    networks:
+      - local_network
+    restart: always
 
 secrets:
   db_user:

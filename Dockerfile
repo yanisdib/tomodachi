@@ -21,7 +21,7 @@ RUN go build -o api .
 # Step 2: Create a minimal production image
 
 # Use a smaller base image for the final image (debian-slim in this case)
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 # Set the working directory for the production container
 WORKDIR /app
