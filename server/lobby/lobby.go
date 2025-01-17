@@ -7,18 +7,18 @@ import (
 
 // Group defines a group of users for a streaming session
 type Lobby struct {
-	ID          string             `json:"id"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
-	Host        *user.User         `json:"host"`
-	Status      EventStatus        `json:"status"`
-	Platform    *platform.Platform `json:"platform"`
-	StartAt     uint64             `json:"startAt"`
-	EndAt       uint64             `json:"endAt"`
-	AccessRule  AccessRule         `json:"accessRule"`
-	Limit       uint8              `json:"limit,omitempty"`
-	CreatedAt   uint64             `json:"createdAt"`
-	UpdatedAt   uint64             `json:"updatedAt,omitempty"`
+	ID          string             `pg:"id" json:"id"`
+	Name        string             `pg:"name" json:"name"`
+	Description string             `pg:"description" json:"description"`
+	Host        *user.User         `pg:"host_id" json:"host"`
+	Status      EventStatus        `pg:"status" json:"status"`
+	Platform    *platform.Platform `pg:"platform_id" json:"platform"`
+	StartAt     uint64             `pg:"start_at" json:"startAt"`
+	EndAt       uint64             `pg:"end_at" json:"endAt"`
+	AccessRule  AccessRule         `pg:"access_rule" json:"accessRule"`
+	Limit       uint8              `pg:"users_limit" json:"limit,omitempty"`
+	CreatedAt   uint64             `pg:"created_at" json:"createdAt"`
+	UpdatedAt   uint64             `pg:"updated_at" json:"updatedAt,omitempty"`
 }
 
 // AccessRule is an enumeration that defines the access required to join a lobby
