@@ -10,7 +10,7 @@ import (
 )
 
 // Creates and uses a connection pool to the database
-func OpenDBConnectionPool() {
+func OpenDBConnectionPool() *pgxpool.Pool {
 	connectionURL := createConnectionURL()
 	dbPool, err := pgxpool.New(context.Background(), connectionURL)
 	if err != nil {
@@ -25,6 +25,7 @@ func OpenDBConnectionPool() {
 	}
 
 	fmt.Println("Connected to database")
+	return dbPool
 }
 
 // Creates a database connection URL based on Docker secrets
