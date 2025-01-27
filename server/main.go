@@ -32,6 +32,8 @@ func main() {
 		}))
 
 		dbPool := config.OpenDBConnectionPool()
+		defer dbPool.Close() // Ensure the pool is closed when the application exits
+
 		platform.NewPlatformRoutes(router, dbPool)
 
 		if err := router.Run(":5050"); err != nil {

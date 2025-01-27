@@ -40,7 +40,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./server/database/create.sql:/docker-entrypoint-initdb.d/create.sql
     ports:
-      - "5000:5432"
+      - "6000:5432"
     networks:
       - local_network
     restart: always

@@ -10,11 +10,11 @@ import (
 )
 
 type CreatePlatformInput struct {
-	Name            string `json:"name" binding:"required"`
+	Name            int    `json:"name" binding:"required"`
 	Server          string `json:"server" binding:"required"`
-	NitroLevel      string `json:"nitro_level" binding:"required"`
+	NitroLevel      uint8  `json:"nitro_level" binding:"required"`
 	VideoResolution string `json:"video_resolution" binding:"required"`
-	NetworkQuality  string `json:"network_quality" binding:"required"`
+	NetworkQuality  uint8  `json:"network_quality" binding:"required"`
 	AccessURL       string `json:"access_url"`
 }
 
@@ -32,10 +32,10 @@ type CreatePlatformInput struct {
 func Create(dbPool *pgxpool.Pool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx, cancel := context.WithTimeout(c, 10*time.Second)
-		var input *CreatePlatformInput
+		var input CreatePlatformInput
 		defer cancel()
 
-		if err := c.ShouldBindBodyWithJSON(input); err != nil {
+		if err := c.ShouldBindBodyWithJSON(&input); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"status":  http.StatusBadRequest,
 				"error":   err.Error(),
@@ -46,7 +46,7 @@ func Create(dbPool *pgxpool.Pool) gin.HandlerFunc {
 		}
 
 		repository := NewPgRepository(dbPool)
-		newPlatform, err := repository.Store(ctx, input)
+		newPlatform, err := repository.Store(ctx, &input)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"status":  http.StatusInternalServerError,

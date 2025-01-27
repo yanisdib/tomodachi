@@ -8,5 +8,5 @@ var (
 		video_resolution, 
 		network_quality, 
 		access_url
-	) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`
+	) VALUES($1, $2, $3, $4, $5, $6) RETURNING id`
 )

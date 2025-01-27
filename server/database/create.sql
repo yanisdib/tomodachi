@@ -20,12 +20,12 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin;
 -- PLATFORMS
 CREATE TABLE IF NOT EXISTS public.platforms (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
+    name BIGINT NOT NULL,
     server VARCHAR(100),
     nitro_level SMALLINT,
     video_resolution VARCHAR(25),
     network_quality SMALLINT,
-    access_link VARCHAR(255)
+    access_url VARCHAR(255)
 );
 
 -- Adds comments to the columns of PLATFORMS table
@@ -34,7 +34,7 @@ COMMENT ON COLUMN platforms.server IS 'Name of the host''s server';
 COMMENT ON COLUMN platforms.nitro_level IS 'Nitro level of the host''s Discord server';
 COMMENT ON COLUMN platforms.video_resolution IS 'Resolution chosen for the event''s video stream';
 COMMENT ON COLUMN platforms.network_quality IS 'Overall network quality of the host';
-COMMENT ON COLUMN platforms.access_link IS 'Access link to the host room depending on the platform';
+COMMENT ON COLUMN platforms.access_url IS 'Access link to the host room depending on the platform';
 
 -- USERS
 CREATE TABLE IF NOT EXISTS public.users (

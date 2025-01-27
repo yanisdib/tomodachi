@@ -17,7 +17,6 @@ func OpenDBConnectionPool() *pgxpool.Pool {
 		fmt.Fprintf(os.Stderr, "Unable to create connection pool: %v\n", err)
 		os.Exit(1)
 	}
-	defer dbPool.Close()
 
 	err = dbPool.Ping(context.TODO())
 	if err != nil {
