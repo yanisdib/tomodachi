@@ -7,8 +7,8 @@
 	"settings": {
 		"workbench.activityBar.location": "top",
 		"workbench.colorCustomizations": {
-		"activityBar.background": "#0a0f11",
-		"statusBar.background": "#0a0f11"
+			"activityBar.background": "#0a0f11",
+			"statusBar.background": "#0a0f11"
 		},
 		"editor.formatOnSave": true,
 		"indentRainbow.colorOnWhiteSpaceOnly": true,
@@ -17,6 +17,13 @@
 		"editor.fontSize": 14,
 		"editor.renderWhitespace": "all",
 		"editor.cursorStyle": "block",
-		"editor.cursorBlinking": "phase"
+		"editor.cursorBlinking": "phase",
+		"organizeImports.localPrefixes": [
+			"@/",
+			"~/",
+			"src/"
+		],
+		"organizeImports.treatRelativeAsLocal": true,
+		"organizeImports.sortMethod": "length-desc"
 	}
 }

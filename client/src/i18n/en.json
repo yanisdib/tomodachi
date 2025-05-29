@@ -1,0 +1,80 @@
+{
+    "general": {
+        "appName": "Tomodachi",
+        "catchphrase": "Your Hub for Shared Fun",
+        "loading": "Loading...",
+        "error": "An error occurred. Please try again later.",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "view": "View",
+        "close": "Close"
+    },
+    "navigation": {
+        "home": "Home",
+        "profile": "Profile",
+        "settings": "Settings",
+        "notifications": "Notifications",
+        "messages": "Messages",
+        "friends": "Friends",
+        "groups": "Groups"
+    },
+    "auth": {
+        "login": "Login",
+        "logout": "Logout",
+        "register": "Register",
+        "forgotPassword": "Forgot Password?",
+        "resetPassword": "Reset Password",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
+    },
+    "profile": {
+        "editProfile": "Edit Profile",
+        "changePassword": "Change Password",
+        "updateSuccess": "Profile updated successfully.",
+        "updateError": "Failed to update profile."
+    },
+    "notifications": {
+        "newMessage": "You have a new message.",
+        "friendRequest": "You have a new friend request.",
+        "groupInvite": "You have been invited to join a group."
+    },
+    "messages": {
+        "send": "Send Message",
+        "newConversation": "New Conversation",
+        "noMessages": "No messages found."
+    },
+    "friends": {
+        "addFriend": "Add Friend",
+        "removeFriend": "Remove Friend",
+        "friendRequestSent": "Friend request sent.",
+        "friendRequestReceived": "You have a new friend request."
+    },
+    "hubs": {
+        "createGroup": "Create Hub",
+        "joinGroup": "Join Hub",
+        "leaveGroup": "Leave Hub",
+        "groupSettings": "Hub Settings",
+        "noGroups": "You are not a member of any hubs."
+    },
+    "comments": {
+        "addComment": "Add Comment",
+        "editComment": "Edit Comment",
+        "deleteComment": "Delete Comment",
+        "noComments": "No comments yet."
+    },
+    "errors": {
+        "notFound": "Page not found.",
+        "unauthorized": "You are not authorized to view this page.",
+        "serverError": "Internal server error. Please try again later."
+    },
+    "footer": {
+        "termsOfService": "Terms of Service",
+        "privacyPolicy": "Privacy Policy",
+        "contactUs": "Contact Us",
+        "aboutUs": "About Us"
+    }
+}
