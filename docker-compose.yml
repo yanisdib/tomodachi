@@ -2,6 +2,7 @@ services:
 
   api:
     build: .
+    container_name: tomodachi-api
     depends_on:
       - postgres
     environment:
@@ -26,6 +27,7 @@ services:
 
   postgres:
     image: bitnami/postgresql:latest
+    container_name: tomodachi-postgres
     environment:
       - POSTGRESQL_USER_FILE=/run/secrets/db_user
       - POSTGRESQL_PASSWORD_FILE=/run/secrets/db_password
@@ -38,12 +40,29 @@ services:
       - db_host
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./server/database/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./api/scripts/migrations/create.sql:/docker-entrypoint-initdb.d/create.sql
     ports:
       - "6000:5432"
     networks:
       - local_network
     restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: tomodachi-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.dev
+      PGADMIN_DEFAULT_USERNAME: daimao
+      PGADMIN_DEFAULT_PASSWORD: finalfantasyvi
+    ports:
+      - "7070:80"
+    depends_on:
+      - postgres
+    networks:
+      - local_network
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    restart: unless-stopped
 
 secrets:
   db_user:
@@ -57,6 +76,7 @@ secrets:
 
 volumes:
   postgres_data:
+  pgadmin-data:
 
 
 networks:

@@ -1,33 +1,31 @@
-# BUILD THE APPLICATION
+# BUILD STAGE
+FROM golang:1.24.3 AS build
 
-# Use the official Golang image as base for building the Go app
-FROM golang:1.23.4 AS build
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the go.mod and go.sum files from the server directory
-COPY server/go.mod server/go.sum ./
+# Copy go.mod and go.sum from api folder
+COPY api/go.mod api/go.sum ./api/
 
-# Download the dependencies and create the go.sum file
+# Download dependencies
+WORKDIR /app/api
 RUN go mod tidy
 
-# Copy the rest of the Go project files (from server directory)
-COPY server/ ./
+# Copy the entire api project into the container
+COPY api/ ./ 
 
-# Build the Go binary from the entry point
-RUN go build -o api .
+# Build the binary from the main package in cmd/server
+RUN go build -o /app/server ./cmd/server
 
-## CREATING A MINIMAL PRODUCTION IMAGE
-
-# Use a smaller base Debian image for the final image
+# FINAL IMAGE
 FROM debian:bookworm-slim
 
-# Set the working directory for the production container
 WORKDIR /app
 
-# Copy the built Go binary from the build stage
-COPY --from=build /app/api /usr/local/bin/api
+# Copy the binary from build stage
+COPY --from=build /app/server /usr/local/bin/server
 
-# Set the entry point for the container to run the Go binary
-ENTRYPOINT ["api"]
+# Optional: expose port (replace with your actual port)
+EXPOSE 8080
+
+# Set the entry point
+ENTRYPOINT ["server"]
