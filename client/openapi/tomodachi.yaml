@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Tomodachi API
+  version: 1.0.0
+  license:
+    name: MIT License
+    url: https://opensource.org/license/mit/
+  description: API for managing hubs in the Tomodachi application.
+
+servers:
+  - url: /api/v1
+    description: Tomodachi API Server
+
+tags:
+  - name: Hubs
+    description: Operations related to hubs
+  - name: Users
+    description: Operations related to users
+  - name: Discord Servers
+    description: Operations related to Discord servers
+
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /hubs:
+    get:
+      tags:
+        - Hubs
+      summary: Get all hubs
+      operationId: getHubs
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/HubListResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+
+  /hubs/{id}:
+    get:
+      tags:
+        - Hubs
+      summary: Get hub by ID
+      operationId: getHubById
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          $ref: '#/components/responses/SingleHubResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Maximum number of items to return
+      required: false
+      schema:
+        type: integer
+        default: 10
+
+    Offset:
+      name: offset
+      in: query
+      description: Offset for pagination
+      required: false
+      schema:
+        type: integer
+        default: 0
+
+    Id:
+      name: id
+      in: path
+      description: The hub ID
+      required: true
+      schema:
+        type: integer
+
+  schemas:
+    Hub:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+          nullable: true
+        event_type:
+          type: string
+          nullable: true
+        languages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        user_limit:
+          type: integer
+          nullable: true
+        access_rule:
+          type: string
+          nullable: true
+        start_at:
+          type: integer
+          format: int64
+          nullable: true
+        end_at:
+          type: integer
+          format: int64
+          nullable: true
+        is_active:
+          type: boolean
+          nullable: true
+        is_open:
+          type: boolean
+          nullable: true
+        created_at:
+          type: integer
+          format: int64
+          nullable: true
+        server_id:
+          type: integer
+          nullable: true
+        host_id:
+          type: integer
+          nullable: true
+      required:
+        - id
+        - name
+      additionalProperties: true
+
+    HubListResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hub'
+        message:
+          type: string
+        status:
+          type: integer
+
+  responses:
+    SingleHubResponse:
+      description: Response with a single Hub object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Hub'
+
+    HubListResponse:
+      description: Response with a list of Hub objects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HubListResponse'
+
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Resource not found
