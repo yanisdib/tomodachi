@@ -1,4 +1,4 @@
-package entity
+package user
 
 type User struct {
 	ID         int64  `json:"id" postgres:"id"`
@@ -21,7 +21,6 @@ type User struct {
 type Role string
 
 const (
-	Admin   Role = "admin"
-	Guest   Role = "guest"
 	Default Role = "default"
+	Admin   Role = "admin"
 )
